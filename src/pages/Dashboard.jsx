@@ -11,6 +11,12 @@ import QuizHistory from "../components/QuizHistory";
 export default function Dashboard() {
 
   const { xp, streak } = useContext(XPContext);
+  
+  const userName =
+  localStorage.getItem("userName") || "Learner";
+
+const userPhoto =
+  localStorage.getItem("userPhoto");
 
   return (
 
@@ -42,13 +48,29 @@ export default function Dashboard() {
 
         {/* Welcome */}
 
-        <h1 className="text-5xl font-bold">
-          Welcome Back 👋
-        </h1>
+       <div className="bg-white p-6 rounded-3xl shadow-lg mb-6 flex items-center gap-4">
 
-        <p className="mt-3 text-gray-600 text-lg">
-          Continue learning and improve your skills.
-        </p>
+  {userPhoto && (
+    <img
+      src={userPhoto}
+      alt="Profile"
+      className="w-16 h-16 rounded-full"
+    />
+  )}
+
+  <div>
+
+    <h1 className="text-4xl font-bold">
+      Welcome Back, {userName} 👋
+    </h1>
+
+    <p className="mt-2 text-gray-600">
+      Continue learning and improve your skills.
+    </p>
+
+  </div>
+
+</div>
 
         <div className="mt-10">
   <ProfileCard />

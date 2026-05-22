@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { quizDatabase } from "../data/aiQuizData";
 import { Link } from "react-router-dom";
+import { generateQuizFromAI } from "../services/gemini";
 
 export default function AIQuizGenerator() {
 
@@ -16,30 +16,46 @@ export default function AIQuizGenerator() {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [feedback, setFeedback] = useState({});
 
-  function generateQuiz() {
+  async function generateQuiz() {
 
-    if (!subject || !difficulty || !studentClass) return;
+  if (!subject || !difficulty || !studentClass) return;
 
-    setLoading(true);
+  setLoading(true);
 
-    setGeneratedQuiz([]);
+  try {
 
-    setTimeout(() => {
+    const response = await generateQuizFromAI(
+      studentClass,
+      subject,
+      difficulty
+    );
 
-      setGeneratedQuiz(
-        quizDatabase[subject][difficulty]
-      );
+    const cleaned = response
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-      setScore(0);
+    const quizData = JSON.parse(cleaned);
 
-      setAnsweredQuestions([]);
+    setGeneratedQuiz(quizData);
 
-      setFeedback({});
+    setScore(0);
 
-      setLoading(false);
+    setAnsweredQuestions([]);
 
-    }, 1500);
+    setFeedback({});
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Failed to generate quiz");
+
   }
+
+  setLoading(false);
+}
+    
 
   function handleAnswer(option, answer, index) {
 
