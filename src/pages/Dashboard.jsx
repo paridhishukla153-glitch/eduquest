@@ -242,6 +242,22 @@ const userPhoto =
 
   </div>
 
+
+</Link>
+<Link to="/science-detective">
+
+  <div className="bg-white p-8 rounded-3xl shadow-lg hover:scale-105 transition">
+
+    <h3 className="text-3xl font-bold">
+      Science Detective
+    </h3>
+
+    <p className="mt-4 text-gray-600">
+      Solve science mysteries and earn XP.
+    </p>
+
+  </div>
+
 </Link>
 
         </div>

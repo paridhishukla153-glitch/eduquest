@@ -9,6 +9,7 @@ import QuizGame from "./games/QuizGame";
 import MemoryGame from "./games/MemoryGame";
 import MathRush from "./games/MathRush";
 import AIQuizGenerator from "./pages/AIQuizGenerator";
+import ScienceDetective from "./games/ScienceDetective";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
       <Route path="/math" element={<MathRush />} />
 
       <Route path="/ai-quiz" element={<AIQuizGenerator />} />
+
+      <Route
+  path="/science-detective"
+  element={<ScienceDetective />}
+/>
 
     </Routes>
   );
